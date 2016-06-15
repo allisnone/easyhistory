@@ -26,9 +26,11 @@ class Day:
         pool = ThreadPool(10)
         pool.map(self.init_stock_history, stock_codes)
 
-    def update(self):
+    def update(self,codes=None):
         """ 更新已经下载的历史数据 """
         stock_codes = self.store.update_stock_codes
+        if codes:
+            stock_codes = codes
         pool = ThreadPool(2)
         pool.map(self.update_single_code, stock_codes)
 
