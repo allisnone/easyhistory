@@ -31,19 +31,26 @@ class Indicator(object):
 
 
 class History(object):
-    def __init__(self, dtype='D', path='history'):
+    def __init__(self, dtype='D', path='history', codes=[]):
         self.market = dict()
         data_path = os.path.join(path, 'day', 'data')
+        self.stock_codes = codes
         self.load_csv_files(data_path)
 
     def load_csv_files(self, path):
-        file_list = [f for f in os.listdir(path) if f.endswith('.csv')]
-        for stock_csv in file_list:
-            csv_ext_index_start = -4
-            stock_code = stock_csv[:csv_ext_index_start]
-
-            csv_path = os.path.join(path, stock_csv)
-            self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
+        if self.stock_codes:
+            for stock_code in self.stock_codes:
+                stock_csv = '%s.csv' % stock_code
+                csv_path = os.path.join(path, stock_csv)
+                self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
+        else:
+            file_list = [f for f in os.listdir(path) if f.endswith('.csv')]
+            for stock_csv in file_list:
+                csv_ext_index_start = -4
+                stock_code = stock_csv[:csv_ext_index_start]
+    
+                csv_path = os.path.join(path, stock_csv)
+                self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
 
     def __getitem__(self, item):
         return self.market[item]
