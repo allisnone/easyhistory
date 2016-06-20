@@ -18,19 +18,22 @@ class Day:
     SINA_API_HOSTNAME = 'vip.stock.finance.sina.com.cn'
     STOCK_CODE_API = 'http://218.244.146.57/static/all.csv'
 
-    def __init__(self, path='history', export='csv'):
+    def __init__(self, path='history', export='csv',codes=''):
         self.store = store.use(export=export, path=path, dtype='D')
+        self.stock_codes = codes
 
     def init(self):
         stock_codes = self.store.init_stock_codes
+        if self.stock_codes:
+            stock_codes = self.stock_codes
         pool = ThreadPool(10)
         pool.map(self.init_stock_history, stock_codes)
 
-    def update(self,codes=None):
+    def update(self):
         """ 更新已经下载的历史数据 """
         stock_codes = self.store.update_stock_codes
-        if codes:
-            stock_codes = codes
+        if self.stock_codes:
+            stock_codes = self.stock_codes
         pool = ThreadPool(2)
         pool.map(self.update_single_code, stock_codes)
 
