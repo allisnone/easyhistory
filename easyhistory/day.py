@@ -26,7 +26,7 @@ class Day:
         stock_codes = self.store.init_stock_codes
         if self.stock_codes:#partially init
             stock_codes = list(set(self.stock_codes).intersection(set(stock_codes)))
-        print('stock_codes_init=%s' % stock_codes)
+        #print('stock_codes_init=%s' % stock_codes)
         pool = ThreadPool(10)
         pool.map(self.init_stock_history, stock_codes)
 
@@ -35,7 +35,7 @@ class Day:
         stock_codes = self.store.update_stock_codes
         if self.stock_codes:#partially update
             stock_codes = list(set(self.stock_codes).intersection(set(stock_codes)))
-        print('stock_codes_init=%s' % stock_codes)
+        #print('stock_codes_init=%s' % stock_codes)
         pool = ThreadPool(2)
         pool.map(self.update_single_code, stock_codes)
 
