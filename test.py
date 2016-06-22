@@ -17,7 +17,7 @@ print(min_low,min_close,max_close)
 
 
 def update_hist(codes=[]):
-    this_day = Day(path="C:/hist")
+    this_day = easyhistory.Day(path="C:/hist")
     stock_codes_need_to_init = this_day.store.init_stock_codes
     actual_init_codes = list(set(stock_codes_need_to_init).intersection(set(codes)))
     if actual_init_codes:
@@ -30,3 +30,6 @@ def update_hist(codes=[]):
     else:
         pass
 
+
+push_stocks=['000932', '002191', '002521', '002766', '601009', '000002', '300162']
+update_hist(push_stocks)
