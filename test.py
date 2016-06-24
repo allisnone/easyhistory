@@ -1,6 +1,6 @@
 import easyhistory
 easyhistory.init('D', export='csv', path="C:/hist",stock_codes=['002789'])
-#easyhistory.update(path="C:/hist",stock_codes=['000042','000060'])
+easyhistory.update(path="C:/hist",stock_codes=['000042','000060'])
 #easyhistory.update_single_code(dtype='D', stock_code='002789', path="C:/hist")
 his = easyhistory.History(dtype='D', path='C:/hist',codes=['000042','000060'])
 
