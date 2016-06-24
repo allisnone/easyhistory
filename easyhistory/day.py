@@ -27,8 +27,8 @@ class Day:
         print(type(stock_codes))
         print('stock_codes=',stock_codes)
         if self.stock_codes:#partially init
-            #stock_codes = list(set(self.stock_codes).intersection(set(stock_codes)))
-            stock_codes = self.stock_codes
+            stock_codes = list(set(self.stock_codes).difference(set(stock_codes)))
+            #stock_codes = self.stock_codes
         print('stock_codes_init=%s' % stock_codes)
         pool = ThreadPool(10)
         pool.map(self.init_stock_history, stock_codes)
@@ -37,7 +37,8 @@ class Day:
         """ 更新已经下载的历史数据 """
         stock_codes = self.store.update_stock_codes
         if self.stock_codes:#partially update
-            stock_codes = list(set(self.stock_codes).intersection(set(stock_codes)))
+            #stock_codes = list(set(self.stock_codes).intersection(set(stock_codes)))
+            stock_codes = self.stock_codes
         print('stock_codes_update=%s' % stock_codes)
         pool = ThreadPool(2)
         pool.map(self.update_single_code, stock_codes)
