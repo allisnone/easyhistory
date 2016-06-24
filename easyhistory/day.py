@@ -27,7 +27,7 @@ class Day:
         print(type(stock_codes))
         print('stock_codes=',stock_codes)
         if self.stock_codes:#partially init
-            stock_codes = list(set(self.stock_codes).difference(set(stock_codes)))
+            stock_codes = stock_codes.difference(self.stock_codes)
             #stock_codes = self.stock_codes
         print('stock_codes_init=%s' % stock_codes)
         pool = ThreadPool(10)
