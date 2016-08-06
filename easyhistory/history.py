@@ -22,9 +22,40 @@ class Indicator(object):
             str_args = ''.join(map(str, args))
             if self.history.get(item + str_args) is not None:
                 return self.history
+            print(item)
             func = getattr(talib, item)
+            """
+            print(args)
+            print(kwargs)
             res_arr = func(self.history['close'].values, *args, **kwargs)
-            self.history[item + str_args] = res_arr
+            print(item + str_args)
+            print(res_arr)
+            #self.history[item + str_args] = res_arr
+            """
+            if item in ['MA','MAX','MIN']:
+                res_arr = func(self.history['close'].values, *args, **kwargs)
+                self.history[item + str_args] = res_arr
+            if item == 'CCI':
+                res_arr = func(self.history['high'].values,self.history['low'].values,
+                               self.history['close'].values, *args, **kwargs)
+                self.history[item + str_args] = res_arr
+            if item == 'MACD':
+                res_arr = func(self.history['close'].values, *args, **kwargs)
+                self.history['macd'] = res_arr[0]       #DIF
+                self.history['macdsignal'] = res_arr[1] #DEA
+                self.history['macdhist'] = res_arr[2]  #MACD
+                
+            if item == 'BBANDS':
+                res_arr = func(self.history['close'].values, *args, **kwargs)
+                self.history['u_band'] = res_arr[0]
+                self.history['m_band'] = res_arr[1]
+                self.history['l_band'] = res_arr[2]
+            if item =='STOCH':
+                res_arr = func(self.history['high'].values,self.history['low'].values,
+                               self.history['close'].values, *args, **kwargs)
+                self.history['fastK'] = res_arr[0]
+                self.history['slowD'] = res_arr[1]
+                self.history['fastJ'] = 3 * self.history['fastK'] - 2 * self.history['slowD']
             return self.history
 
         return talib_func
