@@ -22,7 +22,6 @@ class Indicator(object):
             str_args = ''.join(map(str, args))
             if self.history.get(item + str_args) is not None:
                 return self.history
-            print(item)
             func = getattr(talib, item)
             """
             print(args)
@@ -81,7 +80,7 @@ class History(object):
         if type=='csv':
             self.load_csv_files(data_path)
         elif type=='mysql':
-            self.get_sql_data(self,stock_sql)
+            self.get_sql_data(stock_sql)
             pass
         else:
             pass
@@ -106,7 +105,7 @@ class History(object):
         for stock_code in self.stock_codes:
             data_df = stock_sql.get_table_df(table=stock_code,columns=None)
             data_df = data_df.set_index('date')
-            self.market[stock_code] = Indicator(stock_code, df)
+            self.market[stock_code] = Indicator(stock_code, data_df)
         return
     
     def __getitem__(self, item):
