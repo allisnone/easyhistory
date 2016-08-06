@@ -7,7 +7,13 @@ test_code = '600103'
 # MA 计算, 直接调用的 talib 的对应函数
 res = his[test_code].MAX(20)
 res = his[test_code].MIN(20)
+res = his[test_code].MA(5)
+res = his[test_code].MA(10)
 res = his[test_code].MA(20)
+res = his[test_code].MA(30)
+res = his[test_code].MA(60)
+res = his[test_code].MA(120)
+res = his[test_code].MA(250)
 res = his[test_code].CCI(timeperiod=14)
 res = his[test_code].MACD(fastperiod=12, slowperiod=26, signalperiod=9)
 #print(res)
