@@ -56,6 +56,18 @@ class Indicator(object):
                 self.history['fastK'] = res_arr[0]
                 self.history['slowD'] = res_arr[1]
                 self.history['fastJ'] = 3 * self.history['fastK'] - 2 * self.history['slowD']
+            if item =='MFI':
+                res_arr = func(self.history['high'].values,self.history['low'].values,
+                               self.history['close'].values, self.history['volume'].values,*args, **kwargs)
+                self.history['MFI'] = res_arr
+            if item =='ATR':
+                res_arr = func(self.history['high'].values,self.history['low'].values,
+                               self.history['close'].values,*args, **kwargs)
+                self.history['ATR'] = res_arr
+            if item =='NATR':
+                res_arr = func(self.history['high'].values,self.history['low'].values,
+                               self.history['close'].values,*args, **kwargs)
+                self.history['NATR'] = res_arr
             return self.history
 
         return talib_func

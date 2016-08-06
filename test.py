@@ -2,20 +2,23 @@ import easyhistory
 #easyhistory.init('D', export='csv', path="C:/hist",stock_codes=['002789'])
 #easyhistory.update(path="C:/hist",stock_codes=['000042','000060'])
 #easyhistory.update_single_code(dtype='D', stock_code='002789', path="C:/hist")
-his = easyhistory.History(dtype='D', path='C:/hist',codes=['000042','000060'])
-
+his = easyhistory.History(dtype='D', path='C:/hist',codes=['000821','300188','600588','002236','600103'])
+test_code = '600103'
 # MA 计算, 直接调用的 talib 的对应函数
-res = his['000042'].MAX(20)
-res = his['000042'].MIN(20)
-res = his['000042'].MA(20)
-res = his['000042'].CCI(timeperiod=14)
-res = his['000042'].MACD(fastperiod=12, slowperiod=26, signalperiod=9)
+res = his[test_code].MAX(20)
+res = his[test_code].MIN(20)
+res = his[test_code].MA(20)
+res = his[test_code].CCI(timeperiod=14)
+res = his[test_code].MACD(fastperiod=12, slowperiod=26, signalperiod=9)
 #print(res)
-res = his['000042'].BBANDS(timeperiod=10,nbdevup=2, nbdevdn=2)#(20,2,2)  #boll
-res = his['000042'].STOCH(fastk_period=9, slowk_period=3, slowd_period=3)  #KDJ
+res = his[test_code].BBANDS(timeperiod=10,nbdevup=2, nbdevdn=2)#(20,2,2)  #boll
+res = his[test_code].STOCH(fastk_period=9, slowk_period=3, slowd_period=3)  #KDJ
+res = his[test_code].MFI(timeperiod=14)  #MFI
+res = his[test_code].ATR(timeperiod=14)  #Average True Range 
+res = his[test_code].NATR(timeperiod=14)  #Normalized Average True Range 
 print( res)
-res.to_csv('000042.csv')
-describe_df = his['000042'].MA(1).tail(3).describe()
+res.to_csv('%s.csv' % test_code)
+describe_df = his[test_code].MA(1).tail(3).describe()
 min_low = describe_df.loc['min'].low
 min_close = describe_df.loc['min'].close
 max_close = describe_df.loc['max'].close
