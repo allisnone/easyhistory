@@ -74,11 +74,18 @@ class Indicator(object):
 
 
 class History(object):
-    def __init__(self, dtype='D', path='history', codes=[]):
+    def __init__(self, dtype='D', path='history', codes=[],type='csv',stock_sql=None):
         self.market = dict()
         data_path = os.path.join(path, 'day', 'data')
         self.stock_codes = codes
-        self.load_csv_files(data_path)
+        if type=='csv':
+            self.load_csv_files(data_path)
+        elif type=='mysql':
+            self.get_sql_data(self,stock_sql)
+            pass
+        else:
+            pass
+            
 
     def load_csv_files(self, path):
         if self.stock_codes:
@@ -94,6 +101,13 @@ class History(object):
     
                 csv_path = os.path.join(path, stock_csv)
                 self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
-
+    
+    def get_sql_data(self,stock_sql): #index_col='date'
+        for stock_code in self.stock_codes:
+            data_df = stock_sql.get_table_df(table=stock_code,columns=None)
+            data_df = data_df.set_index('date')
+            self.market[stock_code] = Indicator(stock_code, df)
+        return
+    
     def __getitem__(self, item):
         return self.market[item]

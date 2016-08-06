@@ -2,8 +2,8 @@ import easyhistory
 easyhistory.init('D', export='csv', path="C:/hist",stock_codes=['sh000001'])
 #easyhistory.update(path="C:/hist",stock_codes=['000042','000060'])
 #easyhistory.update_single_code(dtype='D', stock_code='002789', path="C:/hist")
-his = easyhistory.History(dtype='D', path='C:/hist',type='mysql',codes=['sh','cyb'])
-test_code = 'sh'
+his = easyhistory.History(dtype='D', path='C:/hist',codes=['000821','300188','600588','002236','600103'])
+test_code = '600103'
 # MA 计算, 直接调用的 talib 的对应函数
 res = his[test_code].MAX(20)
 res = his[test_code].MIN(20)
