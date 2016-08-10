@@ -21,6 +21,7 @@ res = his[test_code].STOCH(fastk_period=9, slowk_period=3, slowd_period=3)  #KDJ
 res = his[test_code].MFI(timeperiod=14)  #MFI
 res = his[test_code].ATR(timeperiod=14)  #Average True Range 
 res = his[test_code].NATR(timeperiod=14)  #Normalized Average True Range 
+res = his[test_code].MOM(12)  #Momentum Indicators
 print( res)
 res.to_csv('%s.csv' % test_code)
 describe_df = his[test_code].MA(1).tail(3).describe()

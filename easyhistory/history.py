@@ -31,7 +31,7 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MAX','MIN']:
+            if item in ['MA','MAX','MIN','MOM']:
                 res_arr = func(self.history['close'].values, *args, **kwargs)
                 self.history[item + str_args] = res_arr
             if item == 'CCI':

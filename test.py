@@ -1,8 +1,9 @@
 import easyhistory
-easyhistory.init('D', export='csv', path="C:/hist",stock_codes=['sh000001'])
+#easyhistory.init('D', export='csv', path="C:/hist",stock_codes=['sh000001'])
 #easyhistory.update(path="C:/hist",stock_codes=['000042','000060'])
 #easyhistory.update_single_code(dtype='D', stock_code='002789', path="C:/hist")
-his = easyhistory.History(dtype='D', path='C:/hist',type='mysql',codes=['sh','cyb'])
+s_sql = pds.StockSQL()
+his = easyhistory.History(dtype='D', path='C:/hist',type='mysql',codes=['sh','cyb'],stock_sql=s_sql)
 test_code = 'sh'
 # MA 计算, 直接调用的 talib 的对应函数
 res = his[test_code].MAX(20)
@@ -21,6 +22,7 @@ res = his[test_code].STOCH(fastk_period=9, slowk_period=3, slowd_period=3)  #KDJ
 res = his[test_code].MFI(timeperiod=14)  #MFI
 res = his[test_code].ATR(timeperiod=14)  #Average True Range 
 res = his[test_code].NATR(timeperiod=14)  #Normalized Average True Range 
+res = his[test_code].MOM(12)  #Momentum Indicators
 print( res)
 res.to_csv('%s.csv' % test_code)
 describe_df = his[test_code].MA(1).tail(3).describe()
