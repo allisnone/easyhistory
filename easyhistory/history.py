@@ -110,3 +110,24 @@ class History(object):
     
     def __getitem__(self, item):
         return self.market[item]
+
+    def get_hist_indicator(self,code_str):
+        res = self[code_str].MAX(20)
+        res = self[code_str].MIN(20)
+        res = self[code_str].MA(5)
+        res = self[code_str].MA(10)
+        res = self[code_str].MA(20)
+        res = self[code_str].MA(30)
+        res = self[code_str].MA(60)
+        res = self[code_str].MA(120)
+        res = self[code_str].MA(250)
+        res = self[code_str].CCI(timeperiod=14)
+        res = self[code_str].MACD(fastperiod=12, slowperiod=26, signalperiod=9)
+        res = self[code_str].BBANDS(timeperiod=10,nbdevup=2, nbdevdn=2)#(20,2,2)  #boll
+        res = self[code_str].STOCH(fastk_period=9, slowk_period=3, slowd_period=3)  #KDJ
+        res = self[code_str].MFI(timeperiod=14)  #MFI
+        res = self[code_str].ATR(timeperiod=14)  #Average True Range 
+        res = self[code_str].NATR(timeperiod=14)  #Normalized Average True Range 
+        res = self[code_str].MOM(timeperiod=12)  #Momentum Indicators
+        res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
+        return res
