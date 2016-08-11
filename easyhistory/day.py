@@ -181,6 +181,7 @@ class Day:
             #"""
             data_str = val.split('.')
             if len(data_str)>2:
+                print('data error ----------------')
                 var = float(data_str[0]+'.'+data_str[1])
                 if val =='11.4.0':
                     val = '11.40'
