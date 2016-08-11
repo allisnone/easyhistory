@@ -77,6 +77,8 @@ class CSVStore(Store):
         result_file_path = os.path.join(self.result_path, '{}.csv'.format(stock_code))
         print(result_file_path)
         factor_cols = his.columns.difference(['date'])
+        his[factor_cols] = his[factor_cols].astype(float)
+        print(type(his.factor.max()))
         his[factor_cols] = his[factor_cols] / his.factor.max()
         print( his[factor_cols])
         his.to_csv(result_file_path, index=False)
