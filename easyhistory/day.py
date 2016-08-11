@@ -181,10 +181,12 @@ class Day:
             #"""
             data_str = val.split('.')
             if len(data_str)>2:
-                day_data[i] = float(data_str[0]+'.'+data_str[1])
+                var = float(data_str[0]+'.'+data_str[1])
+                if val =='11.4.0':
+                    val = '11.40'
             else:
-            #"""
-                try:
-                    day_data[i] = float(val)
-                except:
-                    day_data[i] =0
+                pass
+            try:
+                day_data[i] = float(val)
+            except:
+                day_data[i] =0
