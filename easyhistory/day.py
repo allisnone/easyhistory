@@ -179,8 +179,9 @@ class Day:
             if i == date_index:
                 continue
             #"""
-            if len(val.split('.'))>2:
-                day_data[i] = float(val[0]+'.'+val[1])
+            data_str = val.split('.')
+            if len(data_str)>2:
+                day_data[i] = float(data_str[0]+'.'+data_str[1])
             else:
             #"""
                 try:
