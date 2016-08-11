@@ -50,6 +50,8 @@ class CSVStore(Store):
         his.to_csv(csv_file_path, index=False)
         date = his.iloc[-1].date
         self.write_summary(stock_code, date)
+        print('===========')
+        print(stock_code, his)
         self.write_factor_his(stock_code, his)
 
     def get_his_stock_date(self, stock_code):
