@@ -180,7 +180,8 @@ class Day:
                 continue
             if val.split('.')>2:
                 day_data[i] = float(val[0]+'.'+val[1])
-            elif '-' in val or '?' in val:
-                day_data[i] = 0.0
             else:
-                day_data[i] = float(val)
+                try:
+                    day_data[i] = float(val)
+                except:
+                     day_data[i] =0
