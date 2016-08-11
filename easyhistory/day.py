@@ -178,13 +178,12 @@ class Day:
         for i, val in enumerate(day_data):
             if i == date_index:
                 continue
-            """
-            if val.split('.')>2:
+            #"""
+            if len(val.split('.'))>2:
                 day_data[i] = float(val[0]+'.'+val[1])
             else:
-                pass
-            """
-            try:
-                day_data[i] = float(val)
-            except:
-                day_data[i] =0
+            #"""
+                try:
+                    day_data[i] = float(val)
+                except:
+                    day_data[i] =0
