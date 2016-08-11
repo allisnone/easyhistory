@@ -80,7 +80,7 @@ class CSVStore(Store):
         #print('factor_cols=',factor_cols)
         try:
             his[factor_cols] = his[factor_cols].astype(float)
-            print(type(his.factor.max()))
+            #print(type(his.factor.max()))
             his[factor_cols] = his[factor_cols] / his.factor.max()
         except:
             print('exception------------------',stock_code)
