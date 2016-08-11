@@ -78,12 +78,12 @@ class CSVStore(Store):
         #print(result_file_path)
         factor_cols = his.columns.difference(['date'])
         #print('factor_cols=',factor_cols)
-        #try:
-        #his[factor_cols] = his[factor_cols].astype(float)
+        try:
+            his[factor_cols] = his[factor_cols].astype(float)
             #print(type(his.factor.max()))
-        his[factor_cols] = his[factor_cols] / his.factor.max()
-        #except:
-            #print('exception------------------',stock_code)
+            his[factor_cols] = his[factor_cols] / his.factor.max()
+        except:
+            print('exception------------------',stock_code)
             #pass
         #print( his[factor_cols])
         his.to_csv(result_file_path, index=False)
