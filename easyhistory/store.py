@@ -50,8 +50,8 @@ class CSVStore(Store):
         his.to_csv(csv_file_path, index=False)
         date = his.iloc[-1].date
         self.write_summary(stock_code, date)
-        print('===========')
-        print(stock_code, his)
+        #print('===========')
+        #print(stock_code, his)
         self.write_factor_his(stock_code, his)
 
     def get_his_stock_date(self, stock_code):
@@ -75,17 +75,17 @@ class CSVStore(Store):
 
     def write_factor_his(self, stock_code, his):
         result_file_path = os.path.join(self.result_path, '{}.csv'.format(stock_code))
-        print(result_file_path)
+        #print(result_file_path)
         factor_cols = his.columns.difference(['date'])
-        print('factor_cols=',factor_cols)
+        #print('factor_cols=',factor_cols)
         try:
             his[factor_cols] = his[factor_cols].astype(float)
             print(type(his.factor.max()))
             his[factor_cols] = his[factor_cols] / his.factor.max()
         except:
-            print('------------------',stock_code)
+            print('exception------------------',stock_code)
             pass
-        print( his[factor_cols])
+        #print( his[factor_cols])
         his.to_csv(result_file_path, index=False)
 
     @property
