@@ -17,7 +17,7 @@ class Indicator(object):
             stock_code = stock_csv[:csv_ext_index_start]
             self.market[stock_code] = pd.read_csv(stock_csv, index_col='date')
 
-    def __getattr__(self, item):
+    def __getattr__(self, item,column='close'):
         def talib_func(*args, **kwargs):
             str_args = ''.join(map(str, args))
             if self.history.get(item + str_args) is not None:
@@ -31,9 +31,22 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MAX','MIN','MOM']:
-                res_arr = func(self.history['close'].values, *args, **kwargs)
+            if item in ['MA','MOM','MAX','MIN']:
+                res_arr = func(self.history[column].values, *args, **kwargs)
                 self.history[item + str_args] = res_arr
+            """
+            if item in ['MAX','MIN']:
+                column = 'close'
+                #index_name = item + str_args
+                if 'high' in str_args:
+                    column= 'high'
+                elif 'low' in str_args:
+                    column= 'low'
+                else:
+                    pass
+                res_arr = func(self.history[column].values, *args, **kwargs)
+                self.history[item + str_args] = res_arr
+            """
             if item == 'CCI':
                 res_arr = func(self.history['high'].values,self.history['low'].values,
                                self.history['close'].values, *args, **kwargs)
