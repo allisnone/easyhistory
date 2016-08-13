@@ -17,7 +17,7 @@ class Indicator(object):
             stock_code = stock_csv[:csv_ext_index_start]
             self.market[stock_code] = pd.read_csv(stock_csv, index_col='date')
 
-    def __getattr__(self, item,column='close'):
+    def __getattr__(self, item):
         def talib_func(*args, **kwargs):
             str_args = ''.join(map(str, args))
             if self.history.get(item + str_args) is not None:
@@ -32,21 +32,19 @@ class Indicator(object):
             #self.history[item + str_args] = res_arr
             """
             if item in ['MA','MOM','MAX','MIN']:
+                column='close'
+                column_key = item + str_args
+                """
+                print('column_key=',column_key)
+                print(args)
+                print(len(args))
+                print(kwargs)
+                """
+                if len(args)==2:
+                    column = args[1]
+                    args = tuple([args[0]])
                 res_arr = func(self.history[column].values, *args, **kwargs)
-                self.history[item + str_args] = res_arr
-            """
-            if item in ['MAX','MIN']:
-                column = 'close'
-                #index_name = item + str_args
-                if 'high' in str_args:
-                    column= 'high'
-                elif 'low' in str_args:
-                    column= 'low'
-                else:
-                    pass
-                res_arr = func(self.history[column].values, *args, **kwargs)
-                self.history[item + str_args] = res_arr
-            """
+                self.history[column_key] = res_arr
             if item == 'CCI':
                 res_arr = func(self.history['high'].values,self.history['low'].values,
                                self.history['close'].values, *args, **kwargs)
@@ -126,7 +124,11 @@ class History(object):
 
     def get_hist_indicator(self,code_str):
         res = self[code_str].MAX(20)
+        res = self[code_str].MAX(20,'high')
         res = self[code_str].MIN(20)
+        res = self[code_str].MIN(20,'low')
+        res = self[code_str].MAX(3)
+        res = self[code_str].MIN(3,'low')
         res = self[code_str].MA(5)
         res = self[code_str].MA(10)
         res = self[code_str].MA(20)
