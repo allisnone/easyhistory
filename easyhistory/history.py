@@ -78,6 +78,21 @@ class Indicator(object):
                 res_arr = func(self.history['high'].values,self.history['low'].values,
                                self.history['close'].values,*args, **kwargs)
                 self.history['NATR'] = res_arr
+            if item in [ 'CDLMORNINGDOJISTAR',#morning Doji Star (Pattern Recognition)  十字启明星, penetration: 0.3
+                        'CDLEVENINGDOJISTAR',#Evening Doji Star (Pattern Recognition),penetration: 0.3
+                        'CDLPIERCING', #Piercing Pattern (Pattern Recognition) 穿刺模型
+                        'CDLABANDONEDBABY', #Abandoned Baby (Pattern Recognition)
+                        'CDL3WHITESOLDIERS', #Three Advancing White Soldiers (Pattern Recognition) 红三兵
+                        'CDLABANDONEDBABY',#Abandoned Baby (Pattern Recognition),penetration: 0.3
+                        'CDLBELTHOLD',#Belt-hold (Pattern Recognition)
+                        'CDLBREAKAWAY',#Breakaway (Pattern Recognition)
+                        'CDLCONCEALBABYSWALL',#Concealing Baby Swallow (Pattern Recognition)
+                        'CDLDARKCLOUDCOVER',#Dark Cloud Cover (Pattern Recognition)
+                        'CDLDRAGONFLYDOJI',#Dragonfly Doji (Pattern Recognition)
+                        ]:
+                res_arr = func(self.history['open'].values, self.history['high'].values, self.history['low'].values, 
+                               self.history['close'].values,*args, **kwargs)
+                self.history[item] = res_arr
             return self.history
 
         return talib_func
@@ -123,6 +138,7 @@ class History(object):
         return self.market[item]
 
     def get_hist_indicator(self,code_str):
+        #http://www.stock-trading-infocentre.com/hanging-man.html
         res = self[code_str].MAX(20)
         res = self[code_str].MAX(20,'high')
         res = self[code_str].MIN(20)
@@ -144,5 +160,6 @@ class History(object):
         res = self[code_str].ATR(timeperiod=14)  #Average True Range 
         res = self[code_str].NATR(timeperiod=14)  #Normalized Average True Range 
         res = self[code_str].MOM(timeperiod=12)  #Momentum Indicators
+        res = self[code_str].CDLMORNINGDOJISTAR()  #Momentum Indicators
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
