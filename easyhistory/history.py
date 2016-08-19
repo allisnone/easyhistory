@@ -31,7 +31,7 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MOM','MAX','MIN']:
+            if item in ['MA','MOM','MAX','MIN',"RIS"]:
                 column='close'
                 column_key = item + str_args
                 """
@@ -92,6 +92,10 @@ class Indicator(object):
                         ]:
                 res_arr = func(self.history['open'].values, self.history['high'].values, self.history['low'].values, 
                                self.history['close'].values,*args, **kwargs)
+                self.history[item] = res_arr
+            if item== 'SAR':
+                #acceleration: 0.02,maximum: 0.2
+                res_arr = func(self.history['high'].values, self.history['low'].values, *args, **kwargs)
                 self.history[item] = res_arr
             return self.history
 
@@ -166,6 +170,8 @@ class History(object):
         res = self[code_str].CDLBREAKAWAY()
         res = self[code_str].CDL3WHITESOLDIERS()
         res = self[code_str].CDLPIERCING()
+        res = self[code_str].SAR()
+        res = self[code_str].RIS()
         
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
