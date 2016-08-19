@@ -165,6 +165,7 @@ class History(object):
         res = self[code_str].CDLBELTHOLD()
         res = self[code_str].CDLBREAKAWAY()
         res = self[code_str].CDL3WHITESOLDIERS()
+        res = self[code_str].CDLPIERCING()
         
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
