@@ -31,7 +31,7 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MOM','MAX','MIN',"RIS"]:
+            if item in ['MA','MOM','MAX','MIN','RSI']:
                 column='close'
                 column_key = item + str_args
                 """
@@ -171,7 +171,7 @@ class History(object):
         res = self[code_str].CDL3WHITESOLDIERS()
         res = self[code_str].CDLPIERCING()
         res = self[code_str].SAR()
-        res = self[code_str].RIS()
+        res = self[code_str].RSI()
         
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
