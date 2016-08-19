@@ -161,5 +161,10 @@ class History(object):
         res = self[code_str].NATR(timeperiod=14)  #Normalized Average True Range 
         res = self[code_str].MOM(timeperiod=12)  #Momentum Indicators
         res = self[code_str].CDLMORNINGDOJISTAR()  #Momentum Indicators
+        res = self[code_str].CDLABANDONEDBABY()
+        res = self[code_str].CDLBELTHOLD()
+        res = self[code_str].CDLBREAKAWAY()
+        res = self[code_str].CDL3WHITESOLDIERS()
+        
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
