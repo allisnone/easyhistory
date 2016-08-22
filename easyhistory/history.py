@@ -85,7 +85,7 @@ class Indicator(object):
                         'CDL3WHITESOLDIERS', #Three Advancing White Soldiers (Pattern Recognition) 红三兵
                         'CDLABANDONEDBABY',#Abandoned Baby (Pattern Recognition),penetration: 0.3
                         'CDLBELTHOLD',#Belt-hold (Pattern Recognition)
-                        'CDLBREAKAWAY',#Breakaway (Pattern Recognition)
+                        'CDLBREAKAWAY',#Breakaway (Pattern Recognition)  破茧而出
                         'CDLCONCEALBABYSWALL',#Concealing Baby Swallow (Pattern Recognition)
                         'CDLDARKCLOUDCOVER',#Dark Cloud Cover (Pattern Recognition)
                         'CDLDRAGONFLYDOJI',#Dragonfly Doji (Pattern Recognition)
@@ -174,9 +174,11 @@ class History(object):
         res = self[code_str].RSI()
         #'LINEARREG','LINEARREG_ANGLE','LINEARREG_INTERCEPT','LINEARREG_SLOPE'
         res = self[code_str].LINEARREG(14) #timeperiod: 14
+        res = self[code_str].LINEARREG(30) #timeperiod: 30
         res = self[code_str].LINEARREG_ANGLE(14)
         res = self[code_str].LINEARREG_INTERCEPT(14)
         res = self[code_str].LINEARREG_SLOPE(14)
+        res = self[code_str].LINEARREG_SLOPE(30)
         #res = self[code_str].RSI()
         #res = self[code_str].RSI()
         
