@@ -31,7 +31,7 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MOM','MAX','MIN','RSI']:
+            if item in ['MA','MOM','MAX','MIN','RSI','LINEARREG','LINEARREG_ANGLE','LINEARREG_INTERCEPT','LINEARREG_SLOPE']:
                 column='close'
                 column_key = item + str_args
                 """
@@ -172,6 +172,14 @@ class History(object):
         res = self[code_str].CDLPIERCING()
         res = self[code_str].SAR()
         res = self[code_str].RSI()
+        #'LINEARREG','LINEARREG_ANGLE','LINEARREG_INTERCEPT','LINEARREG_SLOPE'
+        res = self[code_str].LINEARREG(14) #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(14)
+        res = self[code_str].LINEARREG_INTERCEPT(14)
+        res = self[code_str].LINEARREG_SLOPE(14)
+        #res = self[code_str].RSI()
+        #res = self[code_str].RSI()
+        
         
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
         return res
