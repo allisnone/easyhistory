@@ -105,6 +105,7 @@ class Indicator(object):
 class History(object):
     def __init__(self, dtype='D', path='history', codes=[],type='csv',stock_sql=None):
         self.market = dict()
+        self.except_codes = list()
         data_path = os.path.join(path, 'day', 'data')
         self.stock_codes = codes
         if type=='csv':
@@ -121,15 +122,23 @@ class History(object):
             for stock_code in self.stock_codes:
                 stock_csv = '%s.csv' % stock_code
                 csv_path = os.path.join(path, stock_csv)
-                self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
+                try:
+                    hist_data = pd.read_csv(csv_path, index_col='date')
+                    self.market[stock_code] = Indicator(stock_code, hist_data)
+                except:
+                    self.except_codes.append(stock_csv)
         else:
             file_list = [f for f in os.listdir(path) if f.endswith('.csv')]
             for stock_csv in file_list:
                 csv_ext_index_start = -4
                 stock_code = stock_csv[:csv_ext_index_start]
-    
                 csv_path = os.path.join(path, stock_csv)
-                self.market[stock_code] = Indicator(stock_code, pd.read_csv(csv_path, index_col='date'))
+                try:
+                    hist_data = pd.read_csv(csv_path, index_col='date')
+                    self.market[stock_code] = Indicator(stock_code, hist_data)
+                except:
+                    self.except_codes.append(stock_csv)
+        print('except_codes=',self.except_codes)
     
     def get_sql_data(self,stock_sql): #index_col='date'
         for stock_code in self.stock_codes:
