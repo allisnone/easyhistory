@@ -82,11 +82,13 @@ class CSVStore(Store):
             his[factor_cols] = his[factor_cols].astype(float)
             #print(type(his.factor.max()))
             his[factor_cols] = his[factor_cols] / his.factor.max()
+            his.to_csv(result_file_path, index=False)
         except:
             print('exception------------------',stock_code)
+            os.remove(result_file_path)
             #pass
         #print( his[factor_cols])
-        his.to_csv(result_file_path, index=False)
+        
 
     @property
     def init_stock_codes(self):
