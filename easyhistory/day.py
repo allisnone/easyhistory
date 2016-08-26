@@ -22,13 +22,16 @@ class Day:
         self.store = store.use(export=export, path=path, dtype='D')
         self.stock_codes = set(codes)
 
-    def init(self):
+    def init(self,set_stocks=[]):
         stock_codes = self.store.init_stock_codes
         print(type(stock_codes))
         print('stock_codes=',stock_codes)
         if self.stock_codes:#partially init
-            stock_codes = stock_codes.difference(self.stock_codes)
+            #stock_codes = stock_codes.difference(self.stock_codes)
+            stock_codes = stock_codes.intersection(self.stock_codes)
             #stock_codes = self.stock_codes
+        if set_stocks:
+            stock_codes = set(set_stocks)
         print('stock_codes_init=%s' % stock_codes)
         pool = ThreadPool(10)
         pool.map(self.init_stock_history, stock_codes)
