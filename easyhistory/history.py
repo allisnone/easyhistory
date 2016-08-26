@@ -105,6 +105,7 @@ class Indicator(object):
 class History(object):
     def __init__(self, dtype='D', path='history', codes=[],type='csv',stock_sql=None):
         self.market = dict()
+        self.indicator_result = dict()
         self.except_codes = list()
         data_path = os.path.join(path, 'day', 'data')
         self.stock_codes = codes
@@ -190,7 +191,11 @@ class History(object):
         res = self[code_str].LINEARREG_SLOPE(30)
         #res = self[code_str].RSI()
         #res = self[code_str].RSI()
-        
-        
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
+        self.indicator_result[code_str] = res
         return res
+    
+    def update_indicator_results(self):
+        for code_str in self.stock_codes:
+            self.get_hist_indicator(code_str)
+        return
