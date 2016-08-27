@@ -31,7 +31,7 @@ class Indicator(object):
             print(res_arr)
             #self.history[item + str_args] = res_arr
             """
-            if item in ['MA','MOM','MAX','MIN','RSI','LINEARREG','LINEARREG_ANGLE','LINEARREG_INTERCEPT','LINEARREG_SLOPE']:
+            if item in ['ROC','MA','MOM','MAX','MIN','RSI','LINEARREG','LINEARREG_ANGLE','LINEARREG_INTERCEPT','LINEARREG_SLOPE']:
                 column='close'
                 column_key = item + str_args
                 """
@@ -156,6 +156,7 @@ class History(object):
 
     def get_hist_indicator(self,code_str):
         #http://www.stock-trading-infocentre.com/hanging-man.html
+        res = self[code_str].ROC(1)
         res = self[code_str].MAX(20)
         res = self[code_str].MAX(20,'high')
         res = self[code_str].MIN(20)
@@ -192,6 +193,7 @@ class History(object):
         res = self[code_str].LINEARREG_INTERCEPT(14)
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
+        res = self[code_str].LINEARREG_ANGLE(14,'ROC1') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA60') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA120') #timeperiod: 14
