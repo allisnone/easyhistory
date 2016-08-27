@@ -190,26 +190,42 @@ class History(object):
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
         try:
-            res = self[code_str].LINEARREG_SLOPE(14,'MA30') #timeperiod: 14
+            res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
         except:
             res['LINEARREG_SLOPE14MA30'] = -100.0
         try:
-            res = self[code_str].LINEARREG_SLOPE(14,'MA60') #timeperiod: 14
+            res = self[code_str].LINEARREG_ANGLE(14,'MA60') #timeperiod: 14
         except:
             res['LINEARREG_SLOPE14MA60'] = -100.0
         try:
-            res = self[code_str].LINEARREG_SLOPE(14,'MA120') #timeperiod: 14
+            res = self[code_str].LINEARREG_ANGLE(14,'MA120') #timeperiod: 14
         except:
             res['LINEARREG_SLOPE14MA120'] = -100.0
         try:
-            res = self[code_str].LINEARREG_SLOPE(14,'MA250') #timeperiod: 14
+            res = self[code_str].LINEARREG_ANGLE(14,'MA250') #timeperiod: 14
         except:
             res['LINEARREG_SLOPE14MA250'] = -100.0
-        res = self[code_str].LINEARREG_SLOPE(14,'CCI') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'SAR') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'RSI') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'macdhist') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'MOM') #timeperiod: 14
+            
+        try:
+            res = self[code_str].LINEARREG_ANGLE(14,'CCI') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14CCI'] = -100.0
+        try:
+            res = self[code_str].LINEARREG_ANGLE(14,'SAR') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14SAR'] = -100.0
+        try:
+            res = self[code_str].LINEARREG_ANGLE(14,'RSI') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14RSI'] = -100.0
+        try:
+            res = self[code_str].LINEARREG_ANGLE(14,'macdhist') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14macdhist'] = -100.0
+        try:
+            res = self[code_str].LINEARREG_ANGLE(14,'MOM') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14MOM'] = -100.0
         #res = self[code_str].RSI()
         #res = self[code_str].RSI()
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
