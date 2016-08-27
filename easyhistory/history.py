@@ -191,8 +191,14 @@ class History(object):
         res = self[code_str].LINEARREG_SLOPE(30)
         res = self[code_str].LINEARREG_SLOPE(14,'MA30') #timeperiod: 14
         res = self[code_str].LINEARREG_SLOPE(14,'MA60') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'MA120') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'MA250') #timeperiod: 14
+        try:
+            res = self[code_str].LINEARREG_SLOPE(14,'MA120') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14MA120'] = 0.0
+        try:
+            res = self[code_str].LINEARREG_SLOPE(14,'MA250') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14MA250'] = 0.0
         res = self[code_str].LINEARREG_SLOPE(14,'CCI') #timeperiod: 14
         res = self[code_str].LINEARREG_SLOPE(14,'SAR') #timeperiod: 14
         res = self[code_str].LINEARREG_SLOPE(14,'RSI') #timeperiod: 14
