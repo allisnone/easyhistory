@@ -124,7 +124,7 @@ class History(object):
                 stock_csv = '%s.csv' % stock_code
                 csv_path = os.path.join(path, stock_csv)
                 try:
-                    hist_data = pd.read_csv(csv_path, index_col='date')
+                    hist_data = pd.read_csv(csv_path)#, index_col='date')
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
@@ -135,7 +135,7 @@ class History(object):
                 stock_code = stock_csv[:csv_ext_index_start]
                 csv_path = os.path.join(path, stock_csv)
                 try:
-                    hist_data = pd.read_csv(csv_path, index_col='date')
+                    hist_data = pd.read_csv(csv_path)#, index_col='date')
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
@@ -144,7 +144,7 @@ class History(object):
     def get_sql_data(self,stock_sql): #index_col='date'
         for stock_code in self.stock_codes:
             data_df = stock_sql.get_table_df(table=stock_code,columns=None)
-            data_df = data_df.set_index('date')
+            #data_df = data_df.set_index('date')
             self.market[stock_code] = Indicator(stock_code, data_df)
         return
     
