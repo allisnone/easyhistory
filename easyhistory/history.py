@@ -189,6 +189,15 @@ class History(object):
         res = self[code_str].LINEARREG_INTERCEPT(14)
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
+        res = self[code_str].LINEARREG_SLOPE(14,'MA30') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'MA60') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'MA120') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'MA250') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'CCI') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'SAR') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'RSI') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'macdhist') #timeperiod: 14
+        res = self[code_str].LINEARREG_SLOPE(14, 'MOM') #timeperiod: 14
         #res = self[code_str].RSI()
         #res = self[code_str].RSI()
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
