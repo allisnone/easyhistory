@@ -189,8 +189,14 @@ class History(object):
         res = self[code_str].LINEARREG_INTERCEPT(14)
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
-        res = self[code_str].LINEARREG_SLOPE(14,'MA30') #timeperiod: 14
-        res = self[code_str].LINEARREG_SLOPE(14,'MA60') #timeperiod: 14
+        try:
+            res = self[code_str].LINEARREG_SLOPE(14,'MA30') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14MA30'] = -100.0
+        try:
+            res = self[code_str].LINEARREG_SLOPE(14,'MA60') #timeperiod: 14
+        except:
+            res['LINEARREG_SLOPE14MA60'] = -100.0
         try:
             res = self[code_str].LINEARREG_SLOPE(14,'MA120') #timeperiod: 14
         except:
