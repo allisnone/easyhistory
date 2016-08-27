@@ -46,7 +46,7 @@ class Indicator(object):
                 try:
                     res_arr = func(self.history[column].values, *args, **kwargs)
                     self.history[column_key] = res_arr
-                except:
+                except: #all Nan
                     self.history[column_key] = -100.0
             if item == 'CCI':
                 res_arr = func(self.history['high'].values,self.history['low'].values,
