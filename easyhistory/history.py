@@ -139,7 +139,7 @@ class History(object):
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
-        print('except_codes=',self.except_codes)
+        #print('except_codes=',self.except_codes)
     
     def get_sql_data(self,stock_sql): #index_col='date'
         for stock_code in self.stock_codes:
