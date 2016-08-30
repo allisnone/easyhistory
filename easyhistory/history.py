@@ -155,8 +155,8 @@ class History(object):
         return self.market[item]
 
     def get_hist_indicator(self,code_str):
-        if code_str not in list(self.keys()):
-            return self[code_str]
+        #if code_str not in list(self.keys()):
+        #    return self[code_str]
         #http://www.stock-trading-infocentre.com/hanging-man.html
         res = self[code_str].ROC(1)
         res = self[code_str].MAX(20)
