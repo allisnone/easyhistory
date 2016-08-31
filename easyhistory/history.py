@@ -2,6 +2,7 @@
 import os
 
 import pandas as pd
+from pandas.lib import Timestamp
 import talib
 
 
@@ -106,28 +107,74 @@ class Indicator(object):
 
 
 class History(object):
-    def __init__(self, dtype='D', path='history', codes=[],type='csv',stock_sql=None):
+    def __init__(self, dtype='D', path='C:/hist/day/data/', codes=[],type='csv',stock_sql=None):
         self.market = dict()
         self.indicator_result = dict()
         self.except_codes = list()
-        data_path = os.path.join(path, 'day', 'data')
+        #data_path = os.path.join(path, 'day', 'data')
+        #if 'export' in path:
+        #    data_path = 
         self.stock_codes = codes
         if type=='csv':
-            self.load_csv_files(data_path)
+            self.load_csv_files(path)
         elif type=='mysql':
             self.get_sql_data(stock_sql)
             pass
         else:
             pass
-            
+    
+    def get_yh_raw_hist_df(self,file_name):
+        #file_type='csv'
+        #ROOT_DIR="C:/中国银河证券海王星/T0002"
+        #file_name="C:/中国银河证券海王星/T0002/export/"+code_str+'.'+file_type
+        raw_column_list=['date','open','high','low','close','volume','amount']
+        #print('file_name=',file_name)
+        df_0=pd.DataFrame({},columns=raw_column_list)
+        try:
+            #print('code_str=%s'%code_str)
+            #df=pd.read_csv(file_name,names=raw_column_list, header=0,encoding='gb2312')#'utf-8')   #for python3
+            df=pd.read_csv(file_name,names=raw_column_list, header=0,encoding='gb2312')#'utf-8')   #for python3
+            #print('pd.read_csv=',df)
+            if df.empty:
+                #print('code_str=',code_str)
+                return df_0
+            last_date=df.tail(1).iloc[0].date
+            if last_date=='数据来源:通达信':
+                df=df[:-1]
+                #print('数据来源:通达信')
+                #print(df.tail(1).iloc[0].date)
+                if df.empty:
+                    return df_0
+                last_volume=df.tail(1).iloc[0].volume
+                if int(last_volume)==0:
+                    df=df[:-1]
+                df['date'].astype(Timestamp)
+                df['factor'] = 1
+                df.to_csv(file_name,encoding='utf-8')
+            else:
+                pass
+            return df
+        except OSError as e:
+            #print('OSError:',e)
+            return df_0
+        
+    def get_csv_file(self,path,stock_csv):
+        file_name = os.path.join(path, stock_csv)
+        if 'data' in path:
+            #file_name= 'C:/hist/day/data/000001.csv'
+            return pd.read_csv(file_name)
+        else:
+            #file_name ="C:/中国银河证券海王星/T0002/export/000001.csv"
+            return  self.get_yh_raw_hist_df(file_name)      
 
     def load_csv_files(self, path):
         if self.stock_codes:
             for stock_code in self.stock_codes:
                 stock_csv = '%s.csv' % stock_code
-                csv_path = os.path.join(path, stock_csv)
+                #csv_path = os.path.join(path, stock_csv)
                 try:
-                    hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    #hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    hist_data = self.get_csv_file(path,stock_csv)
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
@@ -136,9 +183,10 @@ class History(object):
             for stock_csv in file_list:
                 csv_ext_index_start = -4
                 stock_code = stock_csv[:csv_ext_index_start]
-                csv_path = os.path.join(path, stock_csv)
+                #csv_path = os.path.join(path, stock_csv)
                 try:
-                    hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    #hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    hist_data = self.get_csv_file(path,stock_csv)
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
