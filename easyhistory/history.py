@@ -148,7 +148,7 @@ class History(object):
                 last_volume=df.tail(1).iloc[0].volume
                 if int(last_volume)==0:
                     df=df[:-1]
-                df['date'].astype(Timestamp)
+                #df['date'].astype(Timestamp)
                 df['factor'] = 1
                 df.to_csv(file_name,encoding='utf-8')
             else:
