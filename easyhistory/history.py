@@ -171,10 +171,10 @@ class History(object):
         if self.stock_codes:
             for stock_code in self.stock_codes:
                 stock_csv = '%s.csv' % stock_code
-                #csv_path = os.path.join(path, stock_csv)
+                csv_path = os.path.join(path, stock_csv)
                 try:
-                    #hist_data = pd.read_csv(csv_path)#, index_col='date')
-                    hist_data = self.get_csv_file(path,stock_csv)
+                    hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    #hist_data = self.get_csv_file(path,stock_csv)
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
@@ -183,10 +183,10 @@ class History(object):
             for stock_csv in file_list:
                 csv_ext_index_start = -4
                 stock_code = stock_csv[:csv_ext_index_start]
-                #csv_path = os.path.join(path, stock_csv)
+                csv_path = os.path.join(path, stock_csv)
                 try:
-                    #hist_data = pd.read_csv(csv_path)#, index_col='date')
-                    hist_data = self.get_csv_file(path,stock_csv)
+                    hist_data = pd.read_csv(csv_path)#, index_col='date')
+                    #hist_data = self.get_csv_file(path,stock_csv)
                     self.market[stock_code] = Indicator(stock_code, hist_data)
                 except:
                     self.except_codes.append(stock_csv)
