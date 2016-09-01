@@ -165,7 +165,7 @@ class History(object):
             return pd.read_csv(file_name)
         else:
             #file_name ="C:/中国银河证券海王星/T0002/export/000001.csv"
-            return  self.get_yh_raw_hist_df(file_name)      
+            return  pd.read_csv(file_name)    
 
     def load_csv_files(self, path):
         if self.stock_codes:
