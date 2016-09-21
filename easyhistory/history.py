@@ -196,10 +196,11 @@ class History(object):
         res = self[code_str].LINEARREG(14) #timeperiod: 14
         res = self[code_str].LINEARREG(30) #timeperiod: 30
         res = self[code_str].LINEARREG_ANGLE(14)
+        res = self[code_str].LINEARREG_ANGLE(8)
         res = self[code_str].LINEARREG_INTERCEPT(14)
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
-        res = self[code_str].LINEARREG_ANGLE(14,'ROC1') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(8,'ROC1') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(5,'MA5') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(6,'MA10') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MA20') #timeperiod: 14
@@ -212,6 +213,7 @@ class History(object):
         res = self[code_str].LINEARREG_ANGLE(14,'RSI') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'macdhist') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MOM') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(14,'MOM') #timeperiod: 14
         """
         try:
             res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
