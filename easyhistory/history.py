@@ -214,7 +214,6 @@ class History(object):
         res = self[code_str].LINEARREG_ANGLE(8,'macdhist') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MOM') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MOM') #timeperiod: 14
-        
         """
         try:
             res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
