@@ -173,6 +173,7 @@ class History(object):
         res = self[code_str].MA(10)
         res = self[code_str].MA(20)
         res = self[code_str].MA(30)
+        res['diff_ma30'] = (res['close']-res['MA30'])/res['MA30']*100.0
         res = self[code_str].MA(60)
         res = self[code_str].MA(120)
         res = self[code_str].MA(250)
@@ -214,6 +215,7 @@ class History(object):
         res = self[code_str].LINEARREG_ANGLE(8,'macdhist') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MOM') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MOM') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(14,'diff_ma30') #timeperiod: 14
         """
         try:
             res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
