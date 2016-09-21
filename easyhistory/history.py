@@ -200,6 +200,9 @@ class History(object):
         res = self[code_str].LINEARREG_SLOPE(14)
         res = self[code_str].LINEARREG_SLOPE(30)
         res = self[code_str].LINEARREG_ANGLE(14,'ROC1') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(5,'MA5') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(6,'MA10') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(8,'MA20') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA60') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA120') #timeperiod: 14
