@@ -258,7 +258,7 @@ class History(object):
         except:
             res['LINEARREG_SLOPE14MOM'] = -100.0
         """
-        
+
         #res = self[code_str].RSI()
         #res = self[code_str].RSI()
         res['MTM'] = 100*res['MOM']/(res['close'].shift(12))
