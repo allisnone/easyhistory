@@ -114,6 +114,7 @@ class History(object):
         #data_path = os.path.join(path, 'day', 'data')
         #if 'export' in path:
         #    data_path = 
+        self.path = path
         self.stock_codes = codes
         if type=='csv':
             self.load_csv_files(path)
@@ -126,6 +127,9 @@ class History(object):
     def load_csv_files(self, path):
         if self.stock_codes:
             for stock_code in self.stock_codes:
+                if self.path =='C:/中国银河证券海王星/T0002/export/' or self.path =='C:/中国银河证券海王星/T0002/export':
+                    if stock_code=='sh000001':
+                        stock_code = '999999'
                 stock_csv = '%s.csv' % stock_code
                 csv_path = os.path.join(path, stock_csv)
                 try:
@@ -162,6 +166,7 @@ class History(object):
         #if code_str not in list(self.keys()):
         #    return self[code_str]
         #http://www.stock-trading-infocentre.com/hanging-man.html
+        
         res = self[code_str].ROC(1)
         res = self[code_str].MAX(20)
         res = self[code_str].MAX(20,'high')
