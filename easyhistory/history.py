@@ -176,9 +176,17 @@ class History(object):
         res = self[code_str].MIN(3,'low')
         res = self[code_str].MA(5)
         res = self[code_str].MA(10)
+        res = self[code_str].LINEARREG_ANGLE(6,'MA10') #timeperiod: 6
+        res = self[code_str].LINEARREG_ANGLE(10,'MA10') #timeperiod: 6
+        res['diff_ma10'] = (res['close']-res['MA10'])/res['MA10']*100.0
+        res = self[code_str].MA(6,'diff_ma10')
         res = self[code_str].MA(20)
         res = self[code_str].MA(30)
+        res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
+        res = self[code_str].LINEARREG_ANGLE(30,'MA30') #timeperiod: 14
         res['diff_ma30'] = (res['close']-res['MA30'])/res['MA30']*100.0
+        res = self[code_str].MA(14,'diff_ma30')
+        res = self[code_str].LINEARREG_ANGLE(14,'diff_ma30') #timeperiod: 14
         res = self[code_str].MA(60)
         res = self[code_str].MA(120)
         res = self[code_str].MA(250)
@@ -208,9 +216,7 @@ class History(object):
         res = self[code_str].LINEARREG_SLOPE(30)
         res = self[code_str].LINEARREG_ANGLE(8,'ROC1') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(5,'MA5') #timeperiod: 14
-        res = self[code_str].LINEARREG_ANGLE(6,'MA10') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MA20') #timeperiod: 14
-        res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA60') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA120') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MA250') #timeperiod: 14
@@ -220,7 +226,6 @@ class History(object):
         res = self[code_str].LINEARREG_ANGLE(8,'macdhist') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(8,'MOM') #timeperiod: 14
         res = self[code_str].LINEARREG_ANGLE(14,'MOM') #timeperiod: 14
-        res = self[code_str].LINEARREG_ANGLE(14,'diff_ma30') #timeperiod: 14
         """
         try:
             res = self[code_str].LINEARREG_ANGLE(14,'MA30') #timeperiod: 14
